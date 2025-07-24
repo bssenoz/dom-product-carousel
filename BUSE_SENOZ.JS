@@ -549,5 +549,19 @@
         });
     };
     
-    init();
+    init();   
+
+    let path = window.location.pathname;
+
+    const observer = new MutationObserver(() => {
+        if (window.location.pathname !== path) {
+            path = window.location.pathname;
+            const carousel = document.querySelector('.product-carousel-container');
+            if (carousel && path !== '/' && path !== '') {
+                carousel.remove();
+            }
+        }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
 })();
